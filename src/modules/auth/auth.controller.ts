@@ -1,7 +1,8 @@
-import { BadRequestException, Body, Controller, Post } from '@nestjs/common';
+import { BadRequestException, Body, Controller, Get, Post, UseGuards } from '@nestjs/common';
 import { AuthService } from './auth.service';
 import { AuthenticateRequestDto } from './dto/authenticate.request.dto';
 import { RegisterRequestDto } from './dto/register.request.dto';
+import JwtAuthenticationGuard from './jwt.guard';
 
 @Controller('auth')
 export class AuthController {
@@ -22,5 +23,10 @@ export class AuthController {
     } catch (e) {
       throw new BadRequestException(e.message);
     }
+  }
+  @Get('authorized')
+  @UseGuards(JwtAuthenticationGuard)
+  authorized(): boolean {
+    return true;
   }
 }
