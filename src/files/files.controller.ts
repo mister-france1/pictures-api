@@ -11,17 +11,15 @@ export class FilesController {
     ) {}
 
     @Get()
-    getFiles(): string {
-        return 'Files';
+    @UseGuards(JwtAuthenticationGuard)
+    getFiles(@Request() req) {
+        return this.filesService.getFiles(req.user.sub);
     }
 
     @Post()
     @UseGuards(JwtAuthenticationGuard)
     @UseInterceptors(FileInterceptor('file'))
     async sendFile(@Request() req, @UploadedFile() file: Express.Multer.File) {
-        //tmp
-        console.log('user ', req.user);
-        console.log('id ', req.user.sub);
-        return this.filesService.uploadPublicFile(file.buffer, file.originalname);
+        return this.filesService.uploadFile(req.user.sub, file.buffer, file.originalname);
     }
 }

@@ -26,7 +26,7 @@ export class AuthController {
   }
   @Get('authorized')
   @UseGuards(JwtAuthenticationGuard)
-  authorized(): boolean {
-    return true;
+  authorized(): string {
+    return 'success';
   }
 }
