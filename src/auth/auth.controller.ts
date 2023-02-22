@@ -3,7 +3,7 @@ import { AuthService } from './auth.service';
 import { AuthenticateRequestDto } from './dto/authenticate.request.dto';
 import { RegisterRequestDto } from './dto/register.request.dto';
 import JwtAuthenticationGuard from './jwt.guard';
-import { LogoutRequestDto } from './dto/logout.request.dto';
+import { LogoutRequestHeadersDto } from './dto/logout.request.headers.dto';
 
 @Controller('auth')
 export class AuthController {
@@ -33,11 +33,19 @@ export class AuthController {
 
   @Post('logout')
   @UseGuards(JwtAuthenticationGuard)
-  async logout(@Request() req, @Body() body: LogoutRequestDto): Promise<string> {
+  async logout(@Request() req): Promise<string> {
     try {
-      const { RefreshToken, AccessToken } = body;
+      const {
+        'authorization-refreshtoken': RefreshToken,
+        'authorization-accesstoken': AccessToken
+      }: LogoutRequestHeadersDto = req.headers;
+
       const IdToken = req.headers.authorization.split(' ')[1];
-      return await this.authService.logout(req.user['cognito:username'], {IdToken, RefreshToken, AccessToken});
+      return await this.authService.logout(req.user['cognito:username'], {
+          IdToken,
+          RefreshToken,
+          AccessToken
+      });
     } catch (e) {
       throw new BadRequestException(e.message);
     }
