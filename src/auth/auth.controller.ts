@@ -5,7 +5,7 @@ import { RegisterRequestDto } from './dto/register.request.dto';
 import JwtAuthenticationGuard from './jwt.guard';
 import { LogoutRequestHeadersDto } from './dto/logout.request.headers.dto';
 
-@Controller('auth')
+@Controller('api/auth')
 export class AuthController {
   constructor(private readonly authService: AuthService) {}
 

@@ -4,7 +4,7 @@ import { FilesService } from './files.service';
 import { Express } from 'express';
 import JwtAuthenticationGuard from '../auth/jwt.guard';
 
-@Controller('files')
+@Controller('api/files')
 export class FilesController {
     constructor(
         private readonly filesService: FilesService,
