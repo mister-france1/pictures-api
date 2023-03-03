@@ -43,6 +43,9 @@ export class AuthService {
                     }
                 },
             );
+        })
+        .then(() => {
+            return this.authenticate({name, password});
         });
     }
 
