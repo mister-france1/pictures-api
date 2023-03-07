@@ -40,7 +40,8 @@ export class FilesService {
             Item: {
                 user_id: userId,
                 picture_id: uuid(),
-                resized_url: `${this.configService.get('AWS_S3_RESIZED_BUCKET_URL')}${uploadResult.Key}`,
+                resized50_url: `${this.configService.get('AWS_S3_RESIZED50_BUCKET_URL')}${uploadResult.Key}`,
+                resized25_url: `${this.configService.get('AWS_S3_RESIZED25_BUCKET_URL')}${uploadResult.Key}`,
                 url: `${this.configService.get('AWS_S3_ORIGIN_BUCKET_URL')}${uploadResult.Key}`
             }
         };

@@ -17,7 +17,8 @@ import { AuthModule } from './auth/auth.module';
         AWS_COGNITO_USER_POOL_ID: Joi.string().required(),
         AWS_COGNITO_CLIENT_ID: Joi.string().required(),
         AWS_S3_ORIGIN_BUCKET_URL: Joi.string().required(),
-        AWS_S3_RESIZED_BUCKET_URL: Joi.string().required(),
+        AWS_S3_RESIZED50_BUCKET_URL: Joi.string().required(),
+        AWS_S3_RESIZED25_BUCKET_URL: Joi.string().required(),
         AWS_DYNAMO_DB_TABLE_NAME: Joi.string().required()
       })
     }),
